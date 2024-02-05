@@ -20,6 +20,7 @@ local plugins = {
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
       local on_attach = function(client, bufnr)
+        require "core.utils".load_mappings("lspconfig", { buffer = bufnr })
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
       end
