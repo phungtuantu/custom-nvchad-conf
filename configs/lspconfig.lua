@@ -15,3 +15,40 @@ end
 
 -- 
 -- lspconfig.pyright.setup { blabla}
+--
+lspconfig.pylsp.setup {
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end,
+  capabilities = capabilities,
+  settings = {
+   pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {'W391'},
+          maxLineLength = 100
+        },
+        jedi_definition = {
+          follow_builtin_definitions = true
+        }
+      }
+    },
+  }
+}
+
+lspconfig.pyright.setup {
+  on_attach = on_attach,
+  settings = {
+    pyright = {autoImportCompletion = true,},
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = 'openFilesOnly',
+        useLibraryCodeForTypes = true,
+        typeCheckingMode = 'off'}
+    }
+  }
+}
+
+require("core.utils").load_mappings("black")

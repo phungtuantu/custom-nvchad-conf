@@ -5,6 +5,14 @@ M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
   },
+  v = {
+    ["<leader>ww"] = {
+      function()
+        local wrapper = vim.fn.input("Wrapper: ")
+        vim.cmd("normal c"..wrapper)
+        vim.cmd("normal p")
+      end, "Wrap symbol around selection"},
+  },
 }
 
 M.telescope = {
@@ -65,6 +73,13 @@ M.nvimdap = {
         require("dap").step_into()
       end,
       "Debug step into"},
+  },
+}
+
+M.black = {
+  plugin = true,
+  n = {
+    ["<leader>cf"] = { "<cmd> !black % <CR>", "Run Black formatter" }
   },
 }
 

@@ -16,7 +16,7 @@ dap.adapters.python = function(cb, config)
   else
     cb({
       type = 'executable',
-      command = '/home/gent/.virtualenvs/dap/bin/python',
+      command = os.getenv('PYENV_ROOT') .. '/versions/dap/bin/python',
       args = { '-m', 'debugpy.adapter' },
       options = {
         source_filetype = 'python',
@@ -39,6 +39,8 @@ dap.configurations.python = {
         return cwd .. '/venv/bin/python'
       elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
         return cwd .. '/.venv/bin/python'
+      elseif vim.fn.executable(cwd .. '/.env/bin/python') == 1 then
+        return cwd .. '/.env/bin/python'
       else
         return '/opt/conda/bin/python'
       end
