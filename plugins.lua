@@ -19,16 +19,16 @@ local plugins = {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
-      local on_attach = function(client, bufnr)
-        require "core.utils".load_mappings("lspconfig", { buffer = bufnr })
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-      end
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      require("lspconfig").pylsp.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
+      -- local on_attach = function(client, bufnr)
+      --   require "core.utils".load_mappings("lspconfig", { buffer = bufnr })
+      --   client.server_capabilities.documentFormattingProvider = false
+      --   client.server_capabilities.documentRangeFormattingProvider = false
+      -- end
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- require("lspconfig").pylsp.setup {
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      -- }
 
     end, -- Override to setup mason-lspconfig
   },
