@@ -83,4 +83,10 @@ M.black = {
   },
 }
 
+M.copilot = {
+  n = {
+    ["<leader>cp"] = { "<cmd> Copilot panel <CR>", "Open up the copilot panel" },
+  }
+}
+
 return M

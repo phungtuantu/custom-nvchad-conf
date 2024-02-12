@@ -76,6 +76,81 @@ local plugins = {
     opts = overrides.nvimtree,
   },
 
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      {
+        -- snippet plugin
+        "L3MON4D3/LuaSnip",
+        dependencies = "rafamadriz/friendly-snippets",
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+          require("plugins.configs.others").luasnip(opts)
+        end,
+      },
+
+      -- autopairing of (){}[] etc
+      {
+        "windwp/nvim-autopairs",
+        opts = {
+          fast_wrap = {},
+          disable_filetype = { "TelescopePrompt", "vim" },
+        },
+        config = function(_, opts)
+          require("nvim-autopairs").setup(opts)
+
+          -- setup cmp for autopairs
+          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+          require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+        end,
+      },
+
+      -- cmp sources plugins
+      {
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+      },
+
+      {
+        "zbirenbaum/copilot-cmp",
+        after = "copilot.lua",
+        config = function ()
+          require("copilot_cmp").setup()
+        end
+      },
+
+      {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+          local opts = {
+                          suggestion = { enabled = false},
+                          panel = { enabled = false },
+                          filetypes = {
+                            markdown = true,
+                            help = true,
+                          },
+                          keymap = {
+                            accept = "<M-l>",
+                            accept_word = false,
+                            accept_line = false,
+                            next = "<M-]>",
+                            prev = "<M-[>",
+                            dismiss = "<C-]>",
+                          },
+                        }
+          require("core.utils").load_mappings("copilot")
+          require("copilot").setup(opts)
+        end,
+       },
+    },
+    opts = overrides.cmp,
+  },
+
   -- Install a plugin
   {
     "max397574/better-escape.nvim",
@@ -87,7 +162,6 @@ local plugins = {
 
   {
     "lewis6991/gitsigns.nvim",
-    lazy=false,
     config = function()
       require("custom.configs.gitsigns")
     end
@@ -96,7 +170,7 @@ local plugins = {
   {
     "mfussenegger/nvim-dap",
     after = "coq_nvim",
-    lazy = false,
+    event = "InsertEnter",
     config = function()
       require("core.utils").load_mappings("nvimdap")
       require"custom.configs.dap"
@@ -186,7 +260,8 @@ local plugins = {
       })
     end,
 
-  }
+  },
+
 
   -- To make a plugin not be loaded
   -- {
