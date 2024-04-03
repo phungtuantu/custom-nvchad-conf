@@ -262,6 +262,15 @@ local plugins = {
 
   },
 
+  {
+    "wellle/context.vim",
+    event = "BufReadPost",
+    config = function()
+      require("core.utils").load_mappings("context")
+      vim.cmd("ContextEnable")
+    end,
+  },
+
 
   -- To make a plugin not be loaded
   -- {

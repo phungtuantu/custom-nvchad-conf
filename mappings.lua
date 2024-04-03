@@ -4,6 +4,7 @@ local M = {}
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
+    ["<leader>s"] = { "<cmd> syntax sync fromstart <CR>", "Resync the syntax highlighting" },
   },
   v = {
     ["<leader>ww"] = {
@@ -86,6 +87,12 @@ M.black = {
 M.copilot = {
   n = {
     ["<leader>cp"] = { "<cmd> Copilot panel <CR>", "Open up the copilot panel" },
+  }
+}
+
+M.context = {
+  n = {
+    ["<leader>ct"] = { "<cmd> ContextToggle <CR>", "Toggle context" },
   }
 }
 
