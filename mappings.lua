@@ -37,7 +37,7 @@ M.nvimtree = {
 
 M.nvimdap = {
   plugin = true,
-  
+
   n = {
     ["<leader>dp"] = {
       function()
@@ -93,6 +93,22 @@ M.copilot = {
 M.context = {
   n = {
     ["<leader>ct"] = { "<cmd> ContextToggle <CR>", "Toggle context" },
+  }
+}
+
+M.aerial = {
+  n = {
+    ["<leader>aa"] = { "<cmd> AerialToggle <CR>", "Toggle aerial" },
+    ["<leader>{"] = { "<cmd> AerialPrev <CR>", "Jump backward with aerial" },
+    ["<leader>}"] = { "<cmd> AerialNext <CR>", "Jump forward with aerial" },
+    ["<leader>fr"] = { "<cmd> Telescope aerial <CR>", "Telescope search with aerial" },
+  }
+}
+
+M.flash = {
+  n = {
+    ["s"] = { function() require("flash").jump() end, "Flash" },
+    ["<C-S>"] = { function() require("flash").toggle() end, "Flash toogle Search" }
   }
 }
 

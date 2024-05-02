@@ -1,5 +1,8 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
+local configs = require("plugins.configs.lspconfig")
+
+local on_attach = configs.on_attach
+local on_init = configs.on_init
+local capabilities = configs.capabilities
 
 local lspconfig = require "lspconfig"
 
@@ -9,6 +12,7 @@ local servers = { "html", "cssls", "tsserver", "clangd", "rust_analyzer" }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
+    on_init = on_init,
     capabilities = capabilities,
   }
 end
@@ -27,7 +31,7 @@ lspconfig.pylsp.setup {
    pylsp = {
       plugins = {
         pycodestyle = {
-          ignore = {'W391', 'W503', 'E501'},
+          ignore = {'W391', 'W503', 'E501', 'E203'},
           maxLineLength = 100
         },
         jedi_definition = {
@@ -48,6 +52,16 @@ lspconfig.pyright.setup {
         diagnosticMode = 'openFilesOnly',
         useLibraryCodeForTypes = true,
         typeCheckingMode = 'off'}
+    }
+  }
+}
+
+lspconfig.ruff_lsp.setup {
+  on_attach = on_attach,
+  init_options = {
+    settings = {
+      -- Any extra CLI arguments for `ruff` go here.
+      args = {},
     }
   }
 }
