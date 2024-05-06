@@ -118,6 +118,16 @@ M.cmp.mapping = {
     "i",
     "s",
   }),
+ ["<C-k>"] = cmp.mapping({
+      i = function()
+        if cmp.visible() then
+          cmp.abort()
+        else
+          cmp.complete()
+        end
+        require("custom.configs.otherfuncs").toggle_completion()
+      end,
+    }),
 }
 
 M.copilot = {

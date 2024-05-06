@@ -92,7 +92,7 @@ M.copilot = {
 
 M.context = {
   n = {
-    ["<leader>ct"] = { "<cmd> ContextToggle <CR>", "Toggle context" },
+    ["<leader>ct"] = { "<cmd> TSContextToggle <CR>", "Toggle context" },
   }
 }
 
@@ -109,6 +109,12 @@ M.flash = {
   n = {
     ["s"] = { function() require("flash").jump() end, "Flash" },
     ["<C-S>"] = { function() require("flash").toggle() end, "Flash toogle Search" }
+  }
+}
+
+M.gitsigns = {
+  n = {
+    ["<leader>gg"] = { "<cmd> Gitsigns toggle_current_line_blame", "Gitsigns toggle current line blame"}
   }
 }
 
