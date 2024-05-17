@@ -289,7 +289,7 @@ local plugins = {
   {
     'stevearc/aerial.nvim',
     opts = {},
-    event = "BufReadPost",
+    event = "VeryLazy",
     config = function()
       require("aerial").setup({
         layout = {
@@ -363,7 +363,20 @@ local plugins = {
       require("core.utils").load_mappings("flash")
     end,
     -- stylua: ignore
-  }
+  },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+    config = function()
+      require("core.utils").load_mappings("markdown")
+    end
+  },
 
 
   -- To make a plugin not be loaded
