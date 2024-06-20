@@ -114,7 +114,7 @@ M.flash = {
 
 M.gitsigns = {
   n = {
-    ["<leader>gg"] = { "<cmd> Gitsigns toggle_current_line_blame", "Gitsigns toggle current line blame"}
+    ["<leader>gg"] = { "<cmd> Gitsigns toggle_current_line_blame <CR>", "Gitsigns toggle current line blame"}
   }
 }
 
