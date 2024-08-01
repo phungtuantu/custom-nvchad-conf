@@ -10,6 +10,13 @@ M.ui = {
 
   hl_override = highlights.override,
   hl_add = highlights.add,
+  lsp = {
+    -- show function signatures i.e args as you type
+    signature = {
+      disabled = true,
+      silent = true,
+    },
+  },
 }
 
 M.plugins = "custom.plugins"
