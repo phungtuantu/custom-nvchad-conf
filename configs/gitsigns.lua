@@ -36,9 +36,6 @@ gitsigns.setup {
     row = 0,
     col = 1
   },
-  yadm = {
-    enable = false
-  },
   on_attach = function(bufnr)
     require "core.utils".load_mappings("gitsigns", { buffer = bufnr })
   end,
