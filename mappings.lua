@@ -6,14 +6,6 @@ M.general = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["<leader>s"] = { "<cmd> syntax sync fromstart <CR>", "Resync the syntax highlighting" },
   },
-  v = {
-    ["<leader>ww"] = {
-      function()
-        local wrapper = vim.fn.input("Wrapper: ")
-        vim.cmd("normal c"..wrapper)
-        vim.cmd("normal p")
-      end, "Wrap symbol around selection"},
-  },
 }
 
 M.telescope = {
@@ -121,6 +113,92 @@ M.gitsigns = {
 M.markdown = {
   n = {
     ["<leader>mp"] = { "<cmd> MarkdownPreviewToggle <CR>", "Toggle markdown preview" }
+  }
+}
+
+M.focus = {
+  n = {
+    ["<leader>wf"] = { "<cmd> FocusToggle <CR>", "Toggle Focus" },
+    ["<leader>ws"] = { "<cmd> FocusSplitNicely <CR>", "Split window based on golden ration" },
+    ["<leader>wc"] = { "<cmd> FocusSplitCycle <CR>", "Cycle through splits" }
+  }
+}
+
+M.surround = {
+  plugin = true,
+
+  i = {
+    ["<C-g>s"] = {
+      function()
+        require('nvim-surround').insert_surround({ line_mode = false })
+      end,
+      "In Insert mode, add a surrounding pair around the cursor",
+      opts = { buffer = false, silent=true}},
+    ["<C-g>S"] = {
+      function()
+        require('nvim-surround').insert_surround({ line_mode = true })
+      end,
+      "In Insert mode, add a surrounding pair around the cursor on new lines",
+      opts = { buffer = false, silent=true}},
+  },
+
+  n = {
+    ["ys"] = {
+      function()
+        return require('nvim-surround').normal_surround({ line_mode = false })
+      end,
+      "In normal mode, add a surrounding pair around the cursor",
+      opts = { buffer = false, silent = true, expr = true}},
+    ["yS"] = {
+      function()
+        return require('nvim-surround').normal_surround({ line_mode = true })
+      end,
+      "In normal mode, add a surrounding pair around the cursor on new lines",
+      opts = { buffer = false, silent = true, expr = true}},
+    ["ds"] = {
+      function()
+        require("nvim-surround").delete_surround()
+      end,
+      "In normal mode, remove a surrounding pair around the cursor",
+      opts = { buffer = false, silent = true, expr = true}},
+    ["cs"] = {
+      function()
+        return require('nvim-surround').change_surround({ line_mode = false})
+      end,
+      "In normal mode, change a surrounding pair around the cursor",
+      opts = { buffer = false, silent = true, expr = true}},
+    ["cS"] = {
+      function()
+        return require('nvim-surround').change_surround({ line_mode = true })
+      end,
+      "In normal mode, change a surrounding pair around the cursor on new lines",
+      opts = { buffer = false, silent = true, expr = true}},
+  },
+
+  v = {
+    ["<leader>ww"] = {
+      function()
+        local curpos = require("nvim-surround.buffer").get_curpos()
+        return string.format(
+            ":lua require'nvim-surround'.visual_surround({ line_mode = false, curpos = { %d, %d }, curswant = %d })<CR>",
+            curpos[1],
+            curpos[2],
+            vim.fn.winsaveview().curswant
+        )
+      end,
+      "In visual mode, add a surrounding pair around the selection",
+      opts = { buffer = false, silent = true, expr = true}},
+    ["<leader>wW"] = {
+      function()
+        local curpos = require("nvim-surround.buffer").get_curpos()
+        return string.format(
+            ":lua require'nvim-surround'.visual_surround({ line_mode = true, curpos = { %d, %d }, curswant = 0 })<CR>",
+            curpos[1],
+            curpos[2]
+        )
+      end,
+      "In visual mode, add a surrounding pair around the selection on new lines",
+      opts = { buffer = false, silent = true, expr = true}},
   }
 }
 
