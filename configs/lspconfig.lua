@@ -7,7 +7,7 @@ local capabilities = configs.capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd", "rust_analyzer" }
+local servers = { "html", "cssls", "ts_ls", "rust_analyzer" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -66,6 +66,19 @@ lspconfig.ruff_lsp.setup {
       args = {},
     }
   }
+}
+
+lspconfig.clangd.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = {
+    textDocument = {
+      completion = {
+        editsNearCursor = true,
+      },
+    },
+    offsetEncoding =  'utf-16' ,
+  },
 }
 
 require("core.utils").load_mappings("black")

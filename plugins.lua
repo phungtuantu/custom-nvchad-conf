@@ -439,7 +439,24 @@ local plugins = {
       })
       require("core.utils").load_mappings("surround")
     end
-}
+  },
+
+  {
+    "theKnightsOfRohan/csvlens.nvim",
+    ft = { "csv", "tsv" },
+    dependencies = {
+        "akinsho/toggleterm.nvim"
+    },
+    config = function()
+      require("csvlens").setup({
+        direction = "float", -- "float" | "vertical" | "horizontal" |  "tab"
+        exec_path = vim.fn.stdpath("data") .. "/csvlens.nvim/" .. "csvlens", -- You can specify the path to the executable if you wish. Otherwise, it will use the command in the PATH.
+        exec_install_path = vim.fn.stdpath("data") .. "/csvlens.nvim/", -- directory to install the executable to if it's not found in the exec_path, ends with /
+      })
+      require("core.utils").load_mappings("csvlens")
+    end,
+    opts = { --[[ Place your opts here ]] }
+  }
 
 
   -- To make a plugin not be loaded

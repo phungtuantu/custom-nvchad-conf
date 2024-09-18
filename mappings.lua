@@ -202,4 +202,10 @@ M.surround = {
   }
 }
 
+M.csvlens = {
+  n = {
+    ["<leader>cv"] = { "<cmd> Csvlens <CR>", "Open Csv Viewer" },
+  }
+}
+
 return M
