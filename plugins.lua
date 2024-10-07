@@ -289,7 +289,7 @@ local plugins = {
   {
     'stevearc/aerial.nvim',
     opts = {},
-    event = "VeryLazy",
+    event = "BufReadPost",
     config = function()
       require("aerial").setup({
         layout = {
@@ -332,7 +332,7 @@ local plugins = {
 
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
+    event = "BufReadPost",
     ---@type Flash.Config
     opts = {
       search = {
@@ -438,6 +438,16 @@ local plugins = {
         },
       })
       require("core.utils").load_mappings("surround")
+    end
+  },
+
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("toggleterm").setup{}
+      require("core.utils").load_mappings("toggleterm")
     end
   },
 

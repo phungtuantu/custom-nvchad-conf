@@ -5,7 +5,70 @@ M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["<leader>s"] = { "<cmd> syntax sync fromstart <CR>", "Resync the syntax highlighting" },
+    -- ["<C-Left>"] = {
+    --   "<cmd>wincmd h<CR>",
+    --   "Overwrite movement command while in normal mode"
+    -- },
+
+    ["<C-Down>"] = {
+      "<cmd>wincmd j<CR>",
+      "Overwrite movement command while in normal mode"
+    },
+
+    ["<C-Up>"] = {
+      "<cmd>wincmd k<CR>",
+      "Overwrite movement command while in normal mode"
+    },
+
+    -- ["<C-Right>"] = {
+    --   "<cmd>wincmd l<CR>",
+    --   "Overwrite movement command while in normal mode"
+    -- },
   },
+  t = {
+    ["<C-h>"] = {
+      "<cmd>wincmd h<CR>",
+      "Overwrite movement command while in terminal mode"
+    },
+
+    -- Terminal opens at the bottom, so C-j will trigger moving to top panel, to avoid overwriting C-k (delete all right of the cursor)
+    ["<C-j>"] = {
+      "<cmd>wincmd k<CR>",
+      "Overwrite movement command while in terminal mode"
+    },
+
+    -- C-Left and C-Right are also used for navigating the command line, so they are also excluded
+
+    -- ["<C-k>"] = {
+    --   "<cmd>wincmd k<CR>",
+    --   "Overwrite movement command while in terminal mode"
+    -- },
+    --
+    -- ["<C-l>"] = {
+    --   "<cmd>wincmd l<CR>",
+    --   "Overwrite movement command while in terminal mode"
+    -- },
+    --
+    -- ["<C-Left>"] = {
+    --   "<cmd>wincmd h<CR>",
+    --   "Overwrite movement command while in terminal mode"
+    -- },
+
+    ["<C-Down>"] = {
+      "<cmd>wincmd j<CR>",
+      "Overwrite movement command while in terminal mode"
+    },
+
+    ["<C-Up>"] = {
+      "<cmd>wincmd k<CR>",
+      "Overwrite movement command while in terminal mode"
+    },
+
+    -- ["<C-Right>"] = {
+    --   "<cmd>wincmd l<CR>",
+    --   "Overwrite movement command while in terminal mode"
+    -- },
+  }
 }
 
 M.telescope = {
@@ -14,6 +77,12 @@ M.telescope = {
   n = {
     -- find
     ["<leader>fg"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
+    ["<leader>fu"] = {
+      function()
+        require('telescope.builtin').lsp_references()
+      end,
+      "Telescope find usages with lsp"
+    }
   },
 }
 -- more keybinds!
@@ -206,6 +275,59 @@ M.csvlens = {
   n = {
     ["<leader>cv"] = { "<cmd> Csvlens <CR>", "Open Csv Viewer" },
   }
+}
+
+M.nvterm = {
+  plugin = false,
+}
+
+M.toggleterm = {
+
+  plugin = true,
+
+  t = {
+    -- toggle in terminal mode
+    ["<A-i>"] = {
+      "<cmd> ToggleTerm direction=float <CR>",
+      "Toggle floating term",
+    },
+
+    ["<A-h>"] = {
+      "<cmd> ToggleTerm direction=horizontal <CR>",
+      "Toggle horizontal term",
+    },
+
+    ["<A-v>"] = {
+      "<cmd> ToggleTerm direction=vertical <CR>",
+      "Toggle vertical term",
+    },
+
+    ["<C-w>"] = {
+      "<C-x><C-w>",
+      "Overwrite windows commands while in terminal mode"
+
+    }
+  },
+
+  n = {
+    -- toggle in normal mode
+    ["<A-i>"] = {
+      "<cmd> ToggleTerm direction=float <CR>",
+      "Toggle floating term",
+    },
+
+    ["<A-h>"] = {
+      "<cmd> ToggleTerm direction=horizontal <CR>",
+      "Toggle horizontal term",
+    },
+
+    ["<A-v>"] = {
+      "<cmd> ToggleTerm direction=vertical <CR>",
+      "Toggle vertical term",
+    },
+
+  },
+
 }
 
 return M
