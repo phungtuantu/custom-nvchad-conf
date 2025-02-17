@@ -282,6 +282,10 @@ local plugins = {
         on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
       }
       vim.cmd("TSContextEnable")
+
+      vim.wo.foldmethod = 'expr'
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.opt.foldlevel = 99
     end
 
   },
