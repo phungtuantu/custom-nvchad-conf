@@ -20,7 +20,7 @@ M.ui = {
 }
 
 M.plugins = "custom.plugins"
-vim.api.nvim_set_hl(0, "@comment", {link = "Comment"})
+vim.api.nvim_set_hl(0, "@comment", { link = "Comment" })
 
 -- check core.mappings for table structure
 M.mappings = require "custom.mappings"

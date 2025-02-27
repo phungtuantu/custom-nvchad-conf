@@ -17,7 +17,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- 
+--
 -- lspconfig.pyright.setup { blabla}
 --
 lspconfig.pylsp.setup {
@@ -28,10 +28,10 @@ lspconfig.pylsp.setup {
   end,
   capabilities = capabilities,
   settings = {
-   pylsp = {
+    pylsp = {
       plugins = {
         pycodestyle = {
-          ignore = {'W391', 'W503', 'E501', 'E203'},
+          ignore = { 'W391', 'W503', 'E501', 'E203' },
           maxLineLength = 100
         },
         jedi_definition = {
@@ -46,13 +46,13 @@ lspconfig.pyright.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
-    pyright = {autoImportCompletion = true,},
+    pyright = { autoImportCompletion = true, },
     python = {
       analysis = {
         autoSearchPaths = true,
         diagnosticMode = 'openFilesOnly',
         useLibraryCodeForTypes = true,
-        typeCheckingMode = 'off'}
+        typeCheckingMode = 'off' }
     }
   }
 }
@@ -77,7 +77,7 @@ lspconfig.clangd.setup {
         editsNearCursor = true,
       },
     },
-    offsetEncoding =  'utf-16' ,
+    offsetEncoding = 'utf-16',
   },
 }
 

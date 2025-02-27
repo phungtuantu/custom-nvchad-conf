@@ -104,37 +104,37 @@ M.nvimdap = {
       function()
         require("dap").repl.toggle()
       end,
-      "Toggle REPL State Inspector"},
+      "Toggle REPL State Inspector" },
 
     ["<leader>dd"] = {
       function()
         require("dapui").toggle()
       end,
-      "Toggle DAP UI"},
+      "Toggle DAP UI" },
 
     ["<leader>db"] = {
       function()
         require("dap").toggle_breakpoint()
       end,
-      "Debug toggle breakpoint"},
+      "Debug toggle breakpoint" },
 
     ["<leader>dc"] = {
       function()
         require("dap").continue()
       end,
-      "Debug continue"},
+      "Debug continue" },
 
     ["<leader>ds"] = {
       function()
         require("dap").step_over()
       end,
-      "Debug step over"},
+      "Debug step over" },
 
     ["<leader>dS"] = {
-      function ()
+      function()
         require("dap").step_into()
       end,
-      "Debug step into"},
+      "Debug step into" },
   },
 }
 
@@ -175,7 +175,7 @@ M.flash = {
 
 M.gitsigns = {
   n = {
-    ["<leader>gg"] = { "<cmd> Gitsigns toggle_current_line_blame <CR>", "Gitsigns toggle current line blame"}
+    ["<leader>gg"] = { "<cmd> Gitsigns toggle_current_line_blame <CR>", "Gitsigns toggle current line blame" }
   }
 }
 
@@ -202,13 +202,15 @@ M.surround = {
         require('nvim-surround').insert_surround({ line_mode = false })
       end,
       "In Insert mode, add a surrounding pair around the cursor",
-      opts = { buffer = false, silent=true}},
+      opts = { buffer = false, silent = true }
+    },
     ["<C-g>S"] = {
       function()
         require('nvim-surround').insert_surround({ line_mode = true })
       end,
       "In Insert mode, add a surrounding pair around the cursor on new lines",
-      opts = { buffer = false, silent=true}},
+      opts = { buffer = false, silent = true }
+    },
   },
 
   n = {
@@ -217,31 +219,36 @@ M.surround = {
         return require('nvim-surround').normal_surround({ line_mode = false })
       end,
       "In normal mode, add a surrounding pair around the cursor",
-      opts = { buffer = false, silent = true, expr = true}},
+      opts = { buffer = false, silent = true, expr = true }
+    },
     ["yS"] = {
       function()
         return require('nvim-surround').normal_surround({ line_mode = true })
       end,
       "In normal mode, add a surrounding pair around the cursor on new lines",
-      opts = { buffer = false, silent = true, expr = true}},
+      opts = { buffer = false, silent = true, expr = true }
+    },
     ["ds"] = {
       function()
         require("nvim-surround").delete_surround()
       end,
       "In normal mode, remove a surrounding pair around the cursor",
-      opts = { buffer = false, silent = true, expr = true}},
+      opts = { buffer = false, silent = true, expr = true }
+    },
     ["cs"] = {
       function()
-        return require('nvim-surround').change_surround({ line_mode = false})
+        return require('nvim-surround').change_surround({ line_mode = false })
       end,
       "In normal mode, change a surrounding pair around the cursor",
-      opts = { buffer = false, silent = true, expr = true}},
+      opts = { buffer = false, silent = true, expr = true }
+    },
     ["cS"] = {
       function()
         return require('nvim-surround').change_surround({ line_mode = true })
       end,
       "In normal mode, change a surrounding pair around the cursor on new lines",
-      opts = { buffer = false, silent = true, expr = true}},
+      opts = { buffer = false, silent = true, expr = true }
+    },
   },
 
   v = {
@@ -249,25 +256,27 @@ M.surround = {
       function()
         local curpos = require("nvim-surround.buffer").get_curpos()
         return string.format(
-            ":lua require'nvim-surround'.visual_surround({ line_mode = false, curpos = { %d, %d }, curswant = %d })<CR>",
-            curpos[1],
-            curpos[2],
-            vim.fn.winsaveview().curswant
+          ":lua require'nvim-surround'.visual_surround({ line_mode = false, curpos = { %d, %d }, curswant = %d })<CR>",
+          curpos[1],
+          curpos[2],
+          vim.fn.winsaveview().curswant
         )
       end,
       "In visual mode, add a surrounding pair around the selection",
-      opts = { buffer = false, silent = true, expr = true}},
+      opts = { buffer = false, silent = true, expr = true }
+    },
     ["<leader>wW"] = {
       function()
         local curpos = require("nvim-surround.buffer").get_curpos()
         return string.format(
-            ":lua require'nvim-surround'.visual_surround({ line_mode = true, curpos = { %d, %d }, curswant = 0 })<CR>",
-            curpos[1],
-            curpos[2]
+          ":lua require'nvim-surround'.visual_surround({ line_mode = true, curpos = { %d, %d }, curswant = 0 })<CR>",
+          curpos[1],
+          curpos[2]
         )
       end,
       "In visual mode, add a surrounding pair around the selection on new lines",
-      opts = { buffer = false, silent = true, expr = true}},
+      opts = { buffer = false, silent = true, expr = true }
+    },
   }
 }
 
@@ -327,6 +336,19 @@ M.toggleterm = {
     },
 
   },
+
+}
+
+M.metals = {
+  n = {
+    ["<leader>sm"] = {
+      function()
+        require('telescope').extensions.metals.commands()
+      end,
+      "Open metals command list with Telescope"
+    }
+
+  }
 
 }
 

@@ -29,7 +29,6 @@ local plugins = {
       --   on_attach = on_attach,
       --   capabilities = capabilities,
       -- }
-
     end, -- Override to setup mason-lspconfig
   },
 
@@ -49,10 +48,10 @@ local plugins = {
             -- You can also define your own configuration
             function()
               return {
-                  exe = "black",
-                  args = { "-q", "-" },
-                  stdin = true,
-                }
+                exe = "black",
+                args = { "-q", "-" },
+                stdin = true,
+              }
             end
           },
         }
@@ -117,7 +116,7 @@ local plugins = {
       {
         "zbirenbaum/copilot-cmp",
         after = "copilot.lua",
-        config = function ()
+        config = function()
           require("copilot_cmp").setup()
         end
       },
@@ -128,25 +127,25 @@ local plugins = {
         event = "InsertEnter",
         config = function()
           local opts = {
-                          suggestion = { enabled = false},
-                          panel = { enabled = false },
-                          filetypes = {
-                            markdown = true,
-                            help = true,
-                          },
-                          keymap = {
-                            accept = "<M-l>",
-                            accept_word = false,
-                            accept_line = false,
-                            next = "<M-]>",
-                            prev = "<M-[>",
-                            dismiss = "<C-]>",
-                          },
-                        }
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+            filetypes = {
+              markdown = true,
+              help = true,
+            },
+            keymap = {
+              accept = "<M-l>",
+              accept_word = false,
+              accept_line = false,
+              next = "<M-]>",
+              prev = "<M-[>",
+              dismiss = "<C-]>",
+            },
+          }
           require("core.utils").load_mappings("copilot")
           require("copilot").setup(opts)
         end,
-       },
+      },
     },
     opts = overrides.cmp,
   },
@@ -173,7 +172,7 @@ local plugins = {
     event = "InsertEnter",
     config = function()
       require("core.utils").load_mappings("nvimdap")
-      require"custom.configs.dap"
+      require "custom.configs.dap"
     end,
     requires = {
       "Pocco81/DAPInstall.nvim",
@@ -194,6 +193,10 @@ local plugins = {
     "scalameta/nvim-metals",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      {
+        "j-hui/fidget.nvim",
+        opts = {},
+      },
       {
         "mfussenegger/nvim-dap",
         config = function(self, opts)
@@ -222,10 +225,11 @@ local plugins = {
         end
       },
     },
-    ft = {"scala", "sbt", "java"},
+    ft = { "scala", "sbt", "java" },
     opts = function()
       local metals_config = require("metals").bare_config()
       require("core.utils").load_mappings("lspconfig")
+      require("core.utils").load_mappings("metals")
 
       -- Example of settings
       metals_config.settings = {
@@ -239,7 +243,7 @@ local plugins = {
       -- you *have* to have a setting to display this in your statusline or else
       -- you'll not see any messages from metals. There is more info in the help
       -- docs about this
-      -- metals_config.init_options.statusBarProvider = "on"
+      metals_config.init_options.statusBarProvider = "off"
 
       -- Example if you are using cmp how to make sure the correct capabilities for snippets are set
       metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -267,18 +271,18 @@ local plugins = {
     event = "BufReadPost",
     config = function()
       require("core.utils").load_mappings("context")
-      require'treesitter-context'.setup{
-        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-        min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+      require 'treesitter-context'.setup {
+        enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
+        max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
+        min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
         line_numbers = true,
         multiline_threshold = 20, -- Maximum number of lines to show for a single context
-        trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-        mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+        trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+        mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
         -- Separator between context and content. Should be a single character string, like '-'.
         -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
         separator = '—',
-        zindex = 20, -- The Z-index of the context window
+        zindex = 20,     -- The Z-index of the context window
         on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
       }
       vim.cmd("TSContextEnable")
@@ -329,8 +333,8 @@ local plugins = {
       require("core.utils").load_mappings("aerial")
     end,
     dependencies = {
-       "nvim-treesitter/nvim-treesitter",
-       "nvim-tree/nvim-web-devicons"
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
     },
   },
 
@@ -387,35 +391,35 @@ local plugins = {
     version = '*',
     config = function()
       require("focus").setup({
-          enable = true, -- Enable module
-          commands = true, -- Create Focus commands
-          autoresize = {
-              enable = true, -- Enable or disable auto-resizing of splits
-              width = 0, -- Force width for the focused window
-              height = 0, -- Force height for the focused window
-              minwidth = 0, -- Force minimum width for the unfocused window
-              minheight = 0, -- Force minimum height for the unfocused window
-              height_quickfix = 10, -- Set the height of quickfix panel
-          },
-          split = {
-              bufnew = false, -- Create blank buffer for new split windows
-              tmux = false, -- Create tmux splits instead of neovim splits
-          },
-          ui = {
-              number = false, -- Display line numbers in the focussed window only
-              relativenumber = false, -- Display relative line numbers in the focussed window only
-              hybridnumber = false, -- Display hybrid line numbers in the focussed window only
-              absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
+        enable = true,          -- Enable module
+        commands = true,        -- Create Focus commands
+        autoresize = {
+          enable = true,        -- Enable or disable auto-resizing of splits
+          width = 0,            -- Force width for the focused window
+          height = 0,           -- Force height for the focused window
+          minwidth = 0,         -- Force minimum width for the unfocused window
+          minheight = 0,        -- Force minimum height for the unfocused window
+          height_quickfix = 10, -- Set the height of quickfix panel
+        },
+        split = {
+          bufnew = false, -- Create blank buffer for new split windows
+          tmux = false,   -- Create tmux splits instead of neovim splits
+        },
+        ui = {
+          number = false,                    -- Display line numbers in the focussed window only
+          relativenumber = false,            -- Display relative line numbers in the focussed window only
+          hybridnumber = false,              -- Display hybrid line numbers in the focussed window only
+          absolutenumber_unfocussed = false, -- Preserve absolute numbers in the unfocussed windows
 
-              cursorline = true, -- Display a cursorline in the focussed window only
-              cursorcolumn = false, -- Display cursorcolumn in the focussed window only
-              colorcolumn = {
-                  enable = false, -- Display colorcolumn in the foccused window only
-                  list = '+1', -- Set the comma-saperated list for the colorcolumn
-              },
-              signcolumn = true, -- Display signcolumn in the focussed window only
-              winhighlight = false, -- Auto highlighting for focussed/unfocussed windows
-          }
+          cursorline = true,                 -- Display a cursorline in the focussed window only
+          cursorcolumn = false,              -- Display cursorcolumn in the focussed window only
+          colorcolumn = {
+            enable = false,                  -- Display colorcolumn in the foccused window only
+            list = '+1',                     -- Set the comma-saperated list for the colorcolumn
+          },
+          signcolumn = true,                 -- Display signcolumn in the focussed window only
+          winhighlight = false,              -- Auto highlighting for focussed/unfocussed windows
+        }
       })
       require("core.utils").load_mappings("focus")
     end,
@@ -426,7 +430,7 @@ local plugins = {
     event = "BufReadPost",
     config = function()
       require("nvim-surround").setup({
-          -- Configuration here, or leave empty to use defaults
+        -- Configuration here, or leave empty to use defaults
         keymaps = {
           -- insert = "<C-g>s",
           -- insert_line = "<C-g>S",
@@ -450,7 +454,7 @@ local plugins = {
     version = "*",
     event = "VeryLazy",
     config = function()
-      require("toggleterm").setup{}
+      require("toggleterm").setup {}
       require("core.utils").load_mappings("toggleterm")
     end
   },
@@ -459,13 +463,13 @@ local plugins = {
     "theKnightsOfRohan/csvlens.nvim",
     ft = { "csv", "tsv" },
     dependencies = {
-        "akinsho/toggleterm.nvim"
+      "akinsho/toggleterm.nvim"
     },
     config = function()
       require("csvlens").setup({
-        direction = "float", -- "float" | "vertical" | "horizontal" |  "tab"
+        direction = "float",                                                 -- "float" | "vertical" | "horizontal" |  "tab"
         exec_path = vim.fn.stdpath("data") .. "/csvlens.nvim/" .. "csvlens", -- You can specify the path to the executable if you wish. Otherwise, it will use the command in the PATH.
-        exec_install_path = vim.fn.stdpath("data") .. "/csvlens.nvim/", -- directory to install the executable to if it's not found in the exec_path, ends with /
+        exec_install_path = vim.fn.stdpath("data") .. "/csvlens.nvim/",      -- directory to install the executable to if it's not found in the exec_path, ends with /
       })
       require("core.utils").load_mappings("csvlens")
     end,

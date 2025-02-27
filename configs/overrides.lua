@@ -62,25 +62,25 @@ M.nvimtree = {
   },
 }
 
-M.cmp = require ("plugins.configs.cmp")
+M.cmp = require("plugins.configs.cmp")
 
 table.unpack = table.unpack or unpack
 
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
 local cmp = require "cmp"
 
 M.cmp.sources = {
-    { name = "copilot"},
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "nvim_lua" },
-    { name = "path" },
+  { name = "copilot" },
+  { name = "nvim_lsp" },
+  { name = "luasnip" },
+  { name = "buffer" },
+  { name = "nvim_lua" },
+  { name = "path" },
 }
 
 M.cmp.mapping = {
@@ -118,16 +118,16 @@ M.cmp.mapping = {
     "i",
     "s",
   }),
- ["<C-k>"] = cmp.mapping({
-      i = function()
-        if cmp.visible() then
-          cmp.abort()
-        else
-          cmp.complete()
-        end
-        require("custom.configs.otherfuncs").toggle_completion()
-      end,
-    }),
+  ["<C-k>"] = cmp.mapping({
+    i = function()
+      if cmp.visible() then
+        cmp.abort()
+      else
+        cmp.complete()
+      end
+      require("custom.configs.otherfuncs").toggle_completion()
+    end,
+  }),
 }
 
 M.copilot = {

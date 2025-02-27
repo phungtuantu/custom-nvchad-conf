@@ -1,4 +1,4 @@
-local dap = require ('dap')
+local dap = require('dap')
 dap.adapters.python = function(cb, config)
   if config.request == 'attach' then
     --@diagnostic disable-next-line: undefined-field
@@ -27,13 +27,13 @@ end
 
 dap.configurations.python = {
   {
-    type = 'python';
-    request = 'launch';
-    name = "Launch file";
+    type = 'python',
+    request = 'launch',
+    name = "Launch file",
 
-    program = "$(file)";
+    program = "$(file)",
     pythonPath = function()
-      if vim.env.VIRTUAL_ENV then return vim.env.VIRTUAL_ENV ..'/bin/python' end
+      if vim.env.VIRTUAL_ENV then return vim.env.VIRTUAL_ENV .. '/bin/python' end
       local cwd = vim.fn.getcwd()
       if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
         return cwd .. '/venv/bin/python'
@@ -44,6 +44,6 @@ dap.configurations.python = {
       else
         return '/opt/conda/bin/python'
       end
-    end;
+    end,
   }
 }

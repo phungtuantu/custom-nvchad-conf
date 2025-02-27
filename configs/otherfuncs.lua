@@ -7,9 +7,9 @@ M.toggle_completion = function()
   if ok then
     vim.g.cmp_toggle_flag = not vim.g.cmp_toggle_flag
     if (vim.g.cmp_toggle_flag) then
-      print ("cmp on")
+      print("cmp on")
     else
-      print ("cmp off")
+      print("cmp off")
     end
     cmp.setup({
       enabled = function()
